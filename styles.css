@@ -67,6 +67,12 @@ video {
     color: aliceblue;
 }
 
+#contact {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
 footer {
-    padding-top: 500px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
