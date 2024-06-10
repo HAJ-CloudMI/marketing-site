@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>CloudMI</title>
+    <!-- HAJ TODO - Add a bunch of meta tags for SEO -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,22 +15,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#">CloudMI</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
+        <a type="button" class="btn btn-outline-light btn-lg" href="#contact">Get in touch</a>
     </div>
 </nav>
 
@@ -40,10 +26,11 @@
         </video>
         <div id="video-section-overlay-text" class="container d-flex justify-content-center position-absolute text-center">
             <div>
-                <h1 class="mb-5">You bring the business idea, WE PRODUCTISE IT.</h1>
+                <h1 class="mb-5">A Software development and IT services company</h1>
+<!--                <h1 class="mb-5">You bring the business idea, WE PRODUCTISE IT.</h1>-->
                 <h2>Allowing you to focus on your core business and what you do best.</h2>
                 <br>
-                <a type="button" class="btn btn-outline-light btn-lg" href="#about">Find out More</a>
+                <a type="button" class="btn btn-outline-light btn-xs" href="#about">Find out More</a>
             </div>
         </div>
     </section>
@@ -107,7 +94,7 @@
     <section id="contact" class="bg-light pt-40">
         <div class="container mx-auto text-center">
             <h1 class="text-body-secondary mb-5">Get In Touch</h1>
-            <form id="contact-form">
+            <form id="contact-form" class="mb-3">
                 <div class="row">
                     <div class="mb-4 col-lg-3 offset-lg-3">
                         <input type="text" class="form-control align-self-center" id="name" name="name" aria-describedby="name" placeholder="Name">
@@ -131,8 +118,15 @@
                 </div>
                 <button type="submit" class="btn btn-outline-dark btn-lg">Send</button>
             </form>
-<!--            HAJ TODO - Thanks for getting in touch! -->
-<!--            HAJ TODO - Error state -->
+
+            <div id="contact-form-status-update-success" class="alert alert-success alert-dismissible fade" role="alert">
+                <strong>Email sent!</strong> Thanks for getting in touch.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div id="contact-form-status-update-failure" class="alert alert-danger alert-dismissible fade" role="alert">
+                <strong>Oh no!</strong> Something has gone wrong. Please try the contact submission form again.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
     </section>
 
@@ -156,6 +150,11 @@
 </script>
 <script type="text/javascript">
     window.onload = function() {
+        const successAlertDiv = document.getElementById('contact-form-status-update-success');
+        const failureAlertDiv = document.getElementById('contact-form-status-update-failure');
+        bootstrap.Alert.getOrCreateInstance(successAlertDiv);
+        bootstrap.Alert.getOrCreateInstance(failureAlertDiv);
+
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             /*
@@ -170,10 +169,11 @@
             emailjs.sendForm("service_8bfkbyi","template_20nwt8k", "#contact-form")
                 .then((response) => {
                     console.log('SUCCESS!', response.status, response.text);
+                    successAlertDiv.classList.add('show');
                 }, (error) => {
                     console.log('FAILED...', error);
+                    failureAlertDiv.classList.add('show');
                 });
-
         });
     }
 </script>
