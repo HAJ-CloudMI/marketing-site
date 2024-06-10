@@ -120,11 +120,11 @@
                 <button type="submit" class="btn btn-outline-dark btn-lg">Send</button>
             </form>
 
-            <div id="contact-form-status-update-success" class="alert alert-success alert-dismissible fade" role="alert">
+            <div id="contact-form-status-update-success" class="alert alert-success alert-dismissible fade d-none" role="alert">
                 <strong>Email sent!</strong> Thanks for getting in touch.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div id="contact-form-status-update-failure" class="alert alert-danger alert-dismissible fade" role="alert">
+            <div id="contact-form-status-update-failure" class="alert alert-danger alert-dismissible fade d-none" role="alert">
                 <strong>Oh no!</strong> Something has gone wrong. Please try the contact submission form again.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -171,9 +171,11 @@
                 .then((response) => {
                     console.log('SUCCESS!', response.status, response.text);
                     successAlertDiv.classList.add('show');
+                    successAlertDiv.classList.remove('d-none');
                 }, (error) => {
                     console.log('FAILED...', error);
                     failureAlertDiv.classList.add('show');
+                    failureAlertDiv.classList.remove('d-none');
                 });
         });
     }
